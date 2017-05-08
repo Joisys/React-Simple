@@ -8,7 +8,8 @@ var browserify = require('browserify');
 var reactify = require('reactify');
 
 var source = require('vinyl-source-stream');
-var concat = require('gulp-concat')
+var concat = require('gulp-concat');
+var eslint = require('gulp-eslint');
 
 var config = {
     path: {
@@ -70,10 +71,17 @@ gulp.task('copy-js', function(){
             .pipe(connect.reload())
 });
 
+//Link Javascript and JSX files
+gulp.task('lint', function(){
+    return gulp.src(config.path.js)
+        .pipe(eslint({config: 'eslint.config.json'}))
+        .pipe(eslint.format());    
+});
+
 //Watch html file changes on save.
 gulp.task('watch', function(){
     gulp.watch(config.path.html,['copy-html'])
-    gulp.watch(config.path.js,['copy-js'])
+    gulp.watch(config.path.js,['copy-js','lint'])
 });
 
 //Run Default task to combain all the related tasks
