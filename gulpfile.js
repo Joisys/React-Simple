@@ -6,12 +6,18 @@ var open = require('gulp-open');
 
 var browserify = require('browserify');
 var reactify = require('reactify');
+
 var source = require('vinyl-source-stream');
+var concat = require('gulp-concat')
 
 var config = {
     path: {
         html: './src/*.html',
         js: './src/**/*.js',
+        css: [
+            "node_modules/bootstrap/dist/css/bootstrap.min.css",
+            "node_modules/bootstrap/dist/css/bootstrap-theme.min.css"
+            ],
         dist: './dist',
         mainJs: './src/main.js'
     }
@@ -39,6 +45,13 @@ gulp.task('copy-html', function(){
         .pipe(connect.reload());
 });
 
+//Copy Html File from src to dist and reload
+gulp.task('copy-css', function(){
+    gulp.src(config.path.css)
+        .pipe(concat('bundle.css'))
+        .pipe(gulp.dest(config.path.dist + '/css'));
+});
+
 //Copy Js File from Src to dist and reload
 gulp.task('copy-js', function(){
 
@@ -59,9 +72,9 @@ gulp.task('copy-js', function(){
 
 //Watch html file changes on save.
 gulp.task('watch', function(){
-    gulp.watch(config.path.html,['html'])
-    gulp.watch(config.path.js,['js'])
+    gulp.watch(config.path.html,['copy-html'])
+    gulp.watch(config.path.js,['copy-js'])
 });
 
 //Run Default task to combain all the related tasks
-gulp.task('default',['copy-html','copy-js','open-web', 'watch']);
+gulp.task('default',['copy-html','copy-css','copy-js','open-web', 'watch']);
