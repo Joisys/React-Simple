@@ -1,0 +1,27 @@
+{
+  "name": "react-simple",
+  "version": "1.0.0",
+  "description": "React \u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[DSimple React Demo Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joisys/React-Simple.git"
+  },
+  "author": "Jose Joseph",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Joisys/React-Simple/issues"
+  },
+  "homepage": "https://github.com/Joisys/React-Simple#readme",
+  "dependencies": {
+    "browserify": "^14.3.0",
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-open": "^2.0.0",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
